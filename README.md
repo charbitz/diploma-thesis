@@ -34,7 +34,9 @@ This is the code repository of my diploma thesis. The was not the original repos
 
 The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). 
 
-Here ...
+                |  training                |  validation                |  test                |
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![DBT images with masses]()   |  ![](71)|  ![](30)|  ![](45)
 
 ### * Apply preprocessing on both image databases in order to get better model performance:
 
