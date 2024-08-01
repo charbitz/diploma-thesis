@@ -12,19 +12,19 @@ This is the code repository of my diploma thesis. The was not the original repos
 
 ### * Apply a YOLO network in DenseNet architecture on DBT data.
 
-* Parameters of dataset splitting:
+Parameters of dataset splitting:
 - training: 50%, validation: 20%, test: 10%
 - splitting based on patients, in order not to have two different views of the same patient's mass in two different sets
 
-* Parameters of training:
+Parameters of training:
 - 
 
-* Preprocessing in order to prepare the dataset:
+Preprocessing in order to prepare the dataset:
 - image downscaling
 - image segmentation
 - getting largest connected component
 
-* Data augmentations while training:
+Data augmentations while training:
 - random scaling in [0.9 1.3]
 - random area cropping with a way that contains though the ground truth bounding box, final fixed image dimensions: (1056, 672)
 - random horrizontal flipping with a probability of 50%
@@ -34,9 +34,7 @@ This is the code repository of my diploma thesis. The was not the original repos
 
 The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). 
 
-                |  training                |  validation                |  test                |
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![DBT images with masses]()   |  ![](71)|  ![](30)|  ![](45)
+Here ...
 
 ### * Apply preprocessing on both image databases in order to get better model performance:
 
@@ -49,6 +47,6 @@ The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/)
 
 ### * Apply transfer learning techniques on YOLOv5 model:
 
-* pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on DBT data 
+Pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on DBT data 
 
-* using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test sets
+Using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test sets
