@@ -17,7 +17,7 @@ Parameters of dataset splitting:
 - splitting based on patients, in order not to have two different views of the same patient's mass in two different sets
 
 Parameters of training:
-- 
+-here
 
 Preprocessing in order to prepare the dataset:
 - image downscaling
