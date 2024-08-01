@@ -10,10 +10,10 @@ This is the code repository of my diploma thesis. The was not the original repos
 
 ## Deep Learning Implementations:
 
-### * Apply DBT data on YOLO network in DenseNet architecture
+### * Apply a YOLO network in DenseNet architecture on DBT data.
 
 Here ...
 
-### * Apply DBT and INBreast data on YOLOv5 network. 
+### * Apply a YOLOv5 network on DBT and INBreast data.
 
 The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). 
