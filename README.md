@@ -1,4 +1,5 @@
 # Mass detection in digital breast tomosynthesis
+# Mass detection in Digital Breast Tomosynthesis
 
 This is the code repository of my diploma thesis. The was not the original repository. In this specific repository the final files were uploaded for demonstration purposes.
 
@@ -7,6 +8,7 @@ This is the code repository of my diploma thesis. The was not the original repos
 * Digital Breast Tomosynthesis dataset published by Duke University, Durham, NC. You can find the dataset [here](https://www.cancerimagingarchive.net/collection/breast-cancer-screening-dbt/). This dataset consists of digital breast tomosynthesis images. Only 200 Biopsied case views and 234 Normal case views from this database were used.
 
 * The famous INBreast dataset which can be found [here](https://www.kaggle.com/datasets/ramanathansp20/inbreast-dataset). This dataset consists of digital mammography images. Only 107 biopsied masses cases from this database were used. The groundtruth boxes were in Regions Of Interest information so the conversion to bounding boxes was implemented with the help of this [repository](github.com/charbitz/breast_mass_detection). Also this repository was used for the conversion of the images from the DICOM format to PNG.
+* The famous INBreast dataset which can be found [here](https://www.kaggle.com/datasets/ramanathansp20/inbreast-dataset). The INBreast database was used because of lack of DBT data. This dataset consists of digital mammography images. Only 107 biopsied masses cases from this database were used. The groundtruth boxes were in Regions Of Interest information so the conversion to bounding boxes was implemented with the help of this [repository](https://github.com/charbitz/breast_mass_detection). Also this repository was used for the conversion of the images from the DICOM format to PNG.
 
 ## Deep Learning Implementations:
 
