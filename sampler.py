@@ -32,56 +32,8 @@ class TomoBatchSampler(Sampler):
                 batch.append(self.data_frame.index.get_loc(index_pos[0]))
             if len(batch) >= self.batch_size:
                 batch_index +=1
-                # print("batch:", batch_index)
-                # print(*batch)
                 yield batch
                 batch = []
-
-
-        # here :
-
-        #     may update the self.positive (because this is the sampling source),
-        #     in order not to sample again the same indexes for the next (and different) batch.
-        #     We want different indexes to be sampled in different batches (i think)
-        #  sth like: self.positive.drop([index_pos[0]])
-
-        # # reset index to avoid problems with sampling non-existing in
-        # self.positive = self.positive.reset_index(drop=True)
-        #
-        # # # create a copy of positive dataframe:
-        # positive_copy = self.positive.copy()
-        #
-        # batch = []
-        # # for _ in range(len(self.positive) // 2):
-        # for _ in range(len(positive_copy) // 2):
-        #     self.positive = self.positive.reset_index(drop=True)
-        #
-        #     index_pos = self.positive.sample().index
-        #     elem=self.positive.index.get_loc(index_pos[0])
-        #     batch.append(self.positive.index.get_loc(index_pos[0]))
-        #
-        #     self.positive = self.positive.drop(elem, axis=0)
-        #     if len(self.negative) > 0:
-        #         self.negative = self.negative.reset_index(drop=True)
-        #
-        #         index_neg = self.negative.sample().index
-        #         batch.append(self.positive.index.get_loc(index_neg[0]))
-        #
-        #         self.negative = self.negative.drop(elem, axis=0)
-        #     else:
-        #         self.positive = self.positive.reset_index(drop=True)
-        #
-        #         index_pos = self.positive.sample().index
-        #         elem = self.positive.index.get_loc(index_pos[0])
-        #         batch.append(self.positive.index.get_loc(index_pos[0]))
-        #
-        #         self.positive = self.positive.drop(elem, axis=0)
-        #     if len(batch) >= self.batch_size:
-        #         yield batch
-        #         batch = []
-
-    # we should also write code to making drop last = False because  :
-    # batch_sampler (in our case TomoBatchSampler) is Mutually exclusive with batch_size, shuffle, sampler, and drop_last
 
     def __len__(self):
         return len(self.positive) // self.batch_size

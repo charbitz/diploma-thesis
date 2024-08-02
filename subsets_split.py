@@ -8,30 +8,21 @@ import random
 my_seed=311
 random.seed(my_seed)
 
-
 # desired splitting ratios:
 train_ratio = 0.5
 valid_ratio = 0.2
-# test_ratio = 0.3
 
-
-# def data_frame_subset(csv_views, csv_boxes, subset, seed=42):
 def data_frame_subset(csv_views, csv_boxes, seed=42):
-    # subset = str(subset).lower()
-    # assert subset in ["test", "train", "validation", "all"]
+
     df_all = pd.read_csv(
         csv_views, dtype={
             "Normal": np.int, "Actionable": np.int, "Benign": np.int, "Cancer": np.int
         }
     )
 
-    # if subset in ["all"]:
-    #     return df_all
-
     df_box = pd.read_csv(csv_boxes)
     df_box = df_box[df_box["PatientID"].isin(df_all["PatientID"])]
     df_box["Diag"] = np.sqrt((df_box["Width"] ** 2 + df_box["Height"] ** 2))
-
 
     # set of all unique patients:
     pat_set = set()
@@ -79,8 +70,6 @@ def data_frame_subset(csv_views, csv_boxes, seed=42):
     df_valid = df_all[df_all["PatientID"].isin(valid_list)]
     df_test = df_all[df_all["PatientID"].isin(test_list)]
 
-    # save the dataframes as csv files, in order to use them as they are also for yolov5 training:
-    # use seed manually (=311 e.g.):
 
     saving_dir = "/mnt/seagate/DBT/manifest-1617905855234/subsets_DFs_seed_" + str(my_seed) +"/"
     os.makedirs(saving_dir, exist_ok=True)
@@ -89,21 +78,11 @@ def data_frame_subset(csv_views, csv_boxes, seed=42):
     df_valid.to_csv(saving_dir + "df_valid.csv", index = False)
     df_test.to_csv(saving_dir + "df_test.csv", index = False)
 
-
-
     return df_train, df_valid, df_test, df_all
-
-    # if subset == "validation":
-    #     return df_all[df_all["PatientID"].isin(valid_list)]
-    # elif subset == "test":
-    #     return df_all[df_all["PatientID"].isin(test_list)]
-    # else:
-    #     return df_all[df_all["PatientID"].isin(train_list)]
 
 
 if __name__ == "__main__":
     # for subset in ["all", "train", "validation", "test"]:
-
 
     dftrain, dfvalid, dftest,dfall = data_frame_subset(
         "/mnt/seagate/DBT/manifest-1617905855234/BCS-DBT labels-new-v0.csv",
@@ -112,13 +91,8 @@ if __name__ == "__main__":
         seed=42
     )
 
-    # for index in range(len(values)):
-    #     value = values[index]
-    #     print(index, value)
-
     dfs = [dfall, dftrain, dfvalid, dftest]
 
-    # for df in [dfall, dftrain, dfvalid, dftest]:
     for index in range(len(dfs)):
 
         df = dfs[index]
@@ -135,14 +109,12 @@ if __name__ == "__main__":
         print(subset_pr, ":")
         # keep the biopsied cases:
         df_boxes = pd.read_csv("/mnt/seagate/DBT/manifest-1617905855234/BCS-DBT boxes-train-v2.csv")
-        # df_biopsied = df[df["StudyUID"].isin(df_boxes["StudyUID"])]
+
         df_biopsied = df[(df["Benign"] == 1) | (df["Cancer"] == 1)]
         df_benign = df_biopsied[df_biopsied["Benign"] == 1]
         df_cancer = df_biopsied[df_biopsied["Cancer"] == 1]
 
         df_normal = df[df["Normal"] == 1]
-
-
 
         print("Volumes: {}".format(len(df)), end="       ")
         print("Biopsied Volumes: {}".format(len(df_biopsied)), end="       ")

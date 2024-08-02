@@ -40,6 +40,9 @@ class WeightedBCELoss(nn.Module):
         y_pred = torch.clamp(y_pred, self.eps, 1.0)
         bce = F.binary_cross_entropy(y_pred, y_true, weight=weights, reduction="sum")
 
+        # Strategy 1 ~ ~ ~ ~ ~ divide with GT sum + 1
+        return self.alpha * 2.0 * bce / (torch.sum(target) + 1)
+
         # # Strategy 2 ~ ~ ~ ~ ~  when GT sum = 1 (normal case), then don't divide with sum:
         # if torch.sum(target) != 0:
         #     result = self.alpha * 2.0 * bce / torch.sum(target)
@@ -47,9 +50,6 @@ class WeightedBCELoss(nn.Module):
         #     result = self.alpha * 2.0 * bce
         #
         # return result
-
-        # Strategy 1 ~ ~ ~ ~ ~ divide with GT sum + 1
-        return self.alpha * 2.0 * bce / (torch.sum(target) + 1)
 
         # # Strategy 3 ~ ~ ~ ~ ~ divide with GT sum + 0.5
         # return self.alpha * 2.0 * bce / (torch.sum(target) + 0.5)
@@ -91,48 +91,28 @@ class LocalizationLoss(nn.Module):
     def forward(self, input, target):
         assert input.size() == target.size()
 
-        # input_np = input.detach().cpu().numpy()       # let me see :
-        # target_np = target.detach().cpu().numpy()       # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         mask = torch.where(
             target[:, 0] == 1.0, target[:, 0], torch.zeros_like(target[:, 0])
         )
-        # mask_np = mask.detach().cpu().numpy()       # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         input_y = input[:, 1] * mask
         input_x = input[:, 2] * mask
         input_h = input[:, 3] * mask
         input_w = input[:, 4] * mask
 
-        # input_y_np = input_y.detach().cpu().numpy()     # let me see :
-        # input_x_np = input_x.detach().cpu().numpy()     # let me see :
-        # input_h_np = input_h.detach().cpu().numpy()     # let me see :
-        # input_w_np = input_w.detach().cpu().numpy()     # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         input_offset = torch.cat((input_y, input_x), dim=1)
         input_box = torch.cat((input_h, input_w), dim=1)
 
-        # input_offset_np = input_offset.detach().cpu().numpy()     # let me see :
-        # input_box_np = input_box.detach().cpu().numpy()     # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         target_offset = target[:, [1, 2]]
         target_box = target[:, [3, 4]]
 
-        # target_offset_np = target_offset.detach().cpu().numpy()  # let me see :
-        # target_box_np = target_box.detach().cpu().numpy()  # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         y_pred_offset = input_offset.view(input_offset.size()[0], -1)
         y_true_offset = target_offset.view(target_offset.size()[0], -1)
 
-        # y_pred_offset_np = y_pred_offset.detach().cpu().numpy()  # let me see :
-        # y_true_offset_np = y_true_offset.detach().cpu().numpy()  # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         y_pred_box = input_box.view(input_box.size()[0], -1)
         y_true_box = target_box.view(target_box.size()[0], -1)
 
-        # y_pred_box_np = y_pred_box.detach().cpu().numpy()  # let me see :
-        # y_true_box_np = y_true_box.detach().cpu().numpy()  # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         loss_offset = F.mse_loss(y_pred_offset, y_true_offset, reduction="sum")
 
         # Strategy 1 ~ ~ ~ ~ ~ divide with GT sum + 1
@@ -145,15 +125,10 @@ class LocalizationLoss(nn.Module):
         # # Strategy 3 ~ ~ ~ ~ ~ divide with GT sum + 0.5
         # loss_offset = loss_offset / (torch.sum(mask) + 0.5)
 
-
-        # loss_offset_np = loss_offset.detach().cpu().numpy()  # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         y_pred_box = torch.where(
             y_true_box == 0.0, torch.zeros_like(y_pred_box), y_pred_box
         )
 
-        # y_pred_box_np = y_pred_box.detach().cpu().numpy()  # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         loss_box = F.mse_loss(y_pred_box, y_true_box, reduction="sum")
 
         # # Strategy 1 ~ ~ ~ ~ ~ divide with GT sum + 1
@@ -166,6 +141,4 @@ class LocalizationLoss(nn.Module):
         # # Strategy 3 ~ ~ ~ ~ ~ divide with GT sum + 0.5
         # loss_box = loss_box / (torch.sum(mask) + 0.5)
 
-        # loss_box_np = loss_box.detach().cpu().numpy()  # let me see :
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         return (loss_offset + loss_box) * self.weight

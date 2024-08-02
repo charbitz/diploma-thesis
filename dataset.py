@@ -59,35 +59,6 @@ class TomoDetectionDataset(Dataset):
         # Variables only_biopsied and only_normal should follow one-hot encoding
         assert (only_biopsied == True and only_normal == False) or (only_biopsied == False and only_normal == True)  or (only_biopsied == False and only_normal == False)   
         self.random = random
-        #
-        #
-        # df_train, df_valid, df_test, df_all = data_frame_subset(
-        #     csv_views, csv_bboxes,
-        #     # subset,
-        #     seed=seed
-        # )
-        #
-        # self.df_train = df_train
-        # self.df_valid = df_valid
-        # self.df_test = df_test
-        # self.df_all = df_all
-        # # #
-        #
-        # if subset == 'train':
-        #     self.data_frame = self.df_train
-        # elif subset == "validation":
-        #     self.data_frame = self.df_valid
-        # elif subset == "test":
-        #     self.data_frame = self.df_test
-        # # otherwise if subset is "all":
-        # else:
-        #     self.data_frame = self.df_all
-        #
-        # # self.data_frame = data_frame_subset(
-        # #     csv_views, csv_bboxes,
-        # #     # subset,
-        # #     seed=seed
-        # # )
 
         self.data_frame = dataframe_subset
 
@@ -111,9 +82,6 @@ class TomoDetectionDataset(Dataset):
 
         # coordinate conv channels
         self.in_channels = 1
-
-        # # pass seed to self to be able to sample the same slice of patient/study/view sample and reproduce results:
-        # self.seed = seed
 
         if max_slice_offset == 0:
             self.df_bboxes["SliceOffset"] = self.df_bboxes.apply(
@@ -155,8 +123,6 @@ class TomoDetectionDataset(Dataset):
         if not self.random:
             # assure the same slice for samples if random is set to False
             np.random.seed(idx)
-        # else:
-        #     np.random.seed(seed=self.seed)
 
         slice_n = np.random.randint(max_slice + 1)
 
@@ -189,10 +155,6 @@ class TomoDetectionDataset(Dataset):
         # read boxes
         boxes = self._df2dict(df_view_bboxes)
 
-        # check sth for debugging:
-        # if len(boxes["X"]) == 0:
-        #     print("this is a normal case!")
-
         if self.transform is not None:
             img, boxes = self.transform((img, boxes))
 
@@ -213,27 +175,6 @@ class TomoDetectionDataset(Dataset):
 
         img_min = np.min(img)
         img_max = np.max(img)
-
-        # # check sth for debugging:
-        # if img_max == 0:
-        #     print("max value found to be 0 in this image")
-
-        # # normalizing:
-        # if self.subset == "train":
-        #     mean_val = 0.1271
-        #     std_val = 0.1570
-        # elif self.subset == "validation":
-        #     mean_val = 0.1301
-        #     std_val = 0.1557
-        # else:
-        #     mean_val = 0.1272
-        #     std_val = 0.1543
-
-        # # standardization:
-        # img = img.astype(np.float32)
-        # mean_val = 0.1271
-        # std_val = 0.1570
-        # img = (img - mean_val) / std_val
 
         # fix dimensions (N, C, H, W)
         img = img[..., np.newaxis]

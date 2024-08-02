@@ -6,8 +6,6 @@ import pandas as pd
 import torch
 import torch.optim as optim
 
-# import matplotlib
-# matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 
 from matplotlib.backends.backend_agg import FigureCanvasAgg
@@ -94,11 +92,6 @@ def main(args):
     for running_seed in seed_list:
 
         torch.backends.cudnn.benchmark = True
-        # torch.backends.cudnn.benchmark = False
-        # torch.cuda.manual_seed_all(args.seed)
-        # torch.backends.cudnn.deterministic = True
-        # torch.backends.cudnn.benchmark = False
-        # torch.backends.cudnn.benchmark = True
 
         # seed the numpy random generator for using it to reproduce training batch indexes:
         rng_ob = np.random.RandomState(seed=running_seed)
@@ -111,8 +104,6 @@ def main(args):
         loader_train, loader_valid, loader_test = data_loaders(args, rng_ob, running_seed)
         loaders = {"train": loader_train, "valid": loader_valid}
 
-        # # this number indicates how often (epochs) the validation will be done:
-        # validation_interval = 1
 
         hparams_dict = {
             "block_config": [(1, 3, 2, 6, 4)],
@@ -217,7 +208,6 @@ def main(args):
                         lr_values_per_epoch.append(optimizer.param_groups[0]['lr'])
 
                         # new early stopping method based on lr value:
-                        # if optimizer.param_groups[0]['lr'] <= 0.000001:
                         if optimizer.param_groups[0]['lr'] <= 1e-6:
                             print("Learning rate is:", optimizer.param_groups[0]['lr'], "so training stops!")
                             break
@@ -238,40 +228,19 @@ def main(args):
 
                             # batches loop for training and validation:
                             for batch_index, data in enumerate(loaders[phase]):
-                                # print(phase)
-                                # print("batch:", batch_index + 1)
                                 x, y_true = data
                                 x, y_true = x.to(device), y_true.to(device)
 
                                 x_max = torch.amax(x)
                                 x_min = torch.amin(x)
 
-                                # y_true_max = torch.amax(y_true)
-                                # y_true_min = torch.amin(y_true)
-                                #
-                                #
-                                # y_true = (y_true - y_true_min) / (y_true_max -y_true_min)
-                                # y_true_max_new = torch.amax(y_true)
-                                # y_true_min_new = torch.amin(y_true)
-
-
                                 optimizer.zero_grad()
 
                                 with torch.set_grad_enabled(phase == "train"):
                                     y_pred = yolo(x)
-                                    #
-                                    # y_pred_max = torch.amax(y_pred)
-                                    # y_pred_min = torch.amin(y_pred)
-                                    #
-                                    #
-                                    # y_pred = (y_pred - y_pred_min) / (y_pred_max - y_pred_min)
-                                    # y_pred_max_new = torch.amax(y_pred)
-                                    # y_pred_min_new = torch.amin(y_pred)
-
-
+      
                                     obj = objectness_loss(y_pred, y_true)
-                                    # y_pred = y_pred.clamp(0, 1)
-                                    # y_pred[y_pred != y_pred] = 0
+
                                     loc = localization_loss(y_pred, y_true)
                                     total_loss = obj + loc
 
@@ -284,11 +253,7 @@ def main(args):
 
                                         y_true_np = y_true.detach().cpu().numpy()
                                         train_target_nb += np.sum(y_true_np[:, 0])
-                                        # df_train_batch_pred, scores_batch_train = evaluate_batch(y_pred, y_true)
                                         df_train_batch_pred = evaluate_batch(y_pred=y_pred, y_true=y_true)
-
-                                        # # collect the scores from all training batches:
-                                        # epoch_scores_train = epoch_scores_train + scores_batch_train
 
                                         df_training_pred = df_training_pred.append(
                                             df_train_batch_pred, ignore_index=True, sort=False
@@ -303,14 +268,9 @@ def main(args):
                                     else:
 
                                         if (epoch_iter+1) % validation_interval_ex == 0:
-                                            # print("validation...")
                                             y_true_np = y_true.detach().cpu().numpy()
                                             valid_target_nb += np.sum(y_true_np[:, 0])
-                                            # df_valid_batch_pred, scores_batch_valid = evaluate_batch(y_pred, y_true)
                                             df_valid_batch_pred = evaluate_batch(y_pred=y_pred, y_true=y_true)
-
-                                            # # collect the scores from all validation batches:
-                                            # epoch_scores_valid = epoch_scores_valid + scores_batch_valid
 
                                             df_validation_pred = df_validation_pred.append(
                                                 df_valid_batch_pred, ignore_index=True, sort=False
@@ -320,27 +280,6 @@ def main(args):
                                             running_valid_loss += total_loss.item()
                                             if (batch_index + 1) == len(loaders[phase]):
                                                 epoch_avg_valid_loss = running_valid_loss / len(loaders['valid'])
-
-                            # # for the first model configuration:
-                            # if i == 0 and j == 0:
-                            #     # for once in 50 epochs
-                            #     if (epoch_iter + 1) % 50 == 0:
-                            #         # epoch_scores_train = epoch_scores_train + scores_batch_train
-                            #
-                            #         # make some histograms of scores from training and validation batches:
-                            #         # y_limit_list = [200, 100, 50, 25]
-                            #         y_limit_list = [25]
-                            #         for y_elem in y_limit_list:
-                            #             imsave(
-                            #                 os.path.join(get_artifact_uri(),
-                            #                              "hist_epoch_" + str(
-                            #                                  epoch_iter + 1) + "_limit_" + str(y_elem) + "_" + str(phase) + ".png"),
-                            #                 plot_hist(values=epoch_scores_train if phase == "train" else epoch_scores_valid,
-                            #                           color_hist=color_train if phase == "train" else color_valid,
-                            #                           y_limit=y_elem,
-                            #                           subset=phase,
-                            #                           epoch=epoch_iter+1)
-                            #             )
 
                             # print this only once (e.g in training phase):
                             if phase == "train":
@@ -358,10 +297,7 @@ def main(args):
                                         run_tpr2_train = epoch_tpr2_train
                                         run_tpr1_train = epoch_tpr1_train
                                         run_auc_train = np.trapz(tpr_train, fps_train)
-                                        # torch.save(
-                                        #     yolo.state_dict(),
-                                        #     os.path.join(get_artifact_uri(), "train_yolo.pt"),
-                                        # )
+
                                         imsave(
                                             os.path.join(get_artifact_uri(), "froc_train.png"),
                                             plot_froc(fps=fps_train,
@@ -414,7 +350,6 @@ def main(args):
                         # keep the average loss from all validation batches for the epochs that the validation is being applied (validation_interval):
                         # also keep the TPR2 value for training and validation subsets for those epochs:
                         if (epoch_iter + 1) % validation_interval_ex == 0:
-                            # print("validation val append")
                             valid_losses.append(epoch_avg_valid_loss)
                             tpr2_train.append(epoch_tpr2_train)
                             tpr2_valid.append(epoch_tpr2)
@@ -432,7 +367,6 @@ def main(args):
                     log_metric("value_threshold", extracted_threshold_value)
                     log_metric("value_TPR", extracted_tpr_value)
                     log_metric("value_FPs", extracted_fps_value)
-                    # log_metric("validation_TPR2_thresh_values",[tuple(svd_thresh_valid)])
 
                     destination_path = mlflow.get_artifact_uri()
 
@@ -447,7 +381,6 @@ def main(args):
                     with open(os.path.join(destination_path, "validation_FPs_values.txt"), 'w') as f:
                         f.write(str(fps_valid))
                         f.close()
-
 
                     imsave(
                         os.path.join(get_artifact_uri(), "loss_train.png"),
@@ -496,19 +429,6 @@ def main(args):
                                                 color_val="red")
                     )
 
-                    # except Exception as e:
-                    #     print("e:",e)
-                    #     # print(
-                    #     #     "{:0>2d}/{} | {} {}".format(
-                    #     #         j + 1, len(hparams), hparams[j], type(e).__name__
-                    #     #     )
-                    #     # )
-
-                    # The hyper-parameter tuning has 6 combinations of hyper-parameters, so 6 models are produced.
-                    # This runs once for every produced model from the hyper-parameter tuning.
-                    # So **hparam will be the parameters of the current model,
-                    # and **loss_param will be the loss parameters of the current model.
-
                     # In each combination of hyper-parameters, a best model is produced,
                     # based on evaluation of validation set from all the running epochs:
 
@@ -523,8 +443,6 @@ def main(args):
                         state_dict = torch.load(model_path)
                         yolo.load_state_dict(state_dict)
                         yolo.eval()             # evaluation mode for testing
-
-                        # yolo.to(device)
 
                         # initialize losses for testing:
                         objectness_loss = objectness_module(
@@ -557,8 +475,7 @@ def main(args):
                             print("evaluating testing batch...")
                             y_true_np = y_true.detach().cpu().numpy()
                             test_target_nb += np.sum(y_true_np[:, 0])
-                            # df_test_batch_pred, scores_batch_test = evaluate_batch(y_pred, y_true)
-                            # df_test_batch_pred = evaluate_batch(y_pred=y_pred, y_true=y_true, froc_th = extracted_threshold_value)
+
                             df_test_batch_pred = evaluate_batch(y_pred=y_pred, y_true=y_true)
 
                             df_test_pred = df_test_pred.append(
@@ -576,26 +493,6 @@ def main(args):
                                 # print("batch:", batch_index+1, "train averaging")
                                 loss_batches_avg = loss_sum_running_batch / len(loader_test)
                                 print("batch:", batch_index + 1, ", avg testing loss:", loss_batches_avg)
-
-                            # # collect the scores of all batches:
-                            # epoch_scores_test = epoch_scores_test + scores_batch_test
-
-
-
-
-                        # # make some histograms of scores from testing batches:
-                        # # y_limit_list = [200, 100, 50, 25]
-                        # y_limit_list = [25]
-                        # for y_elem in y_limit_list:
-                        #     imsave(
-                        #         os.path.join(get_artifact_uri(),
-                        #                      "hist" + "_limit_" + str(y_elem) + "_test.png"),
-                        #         plot_hist(values=epoch_scores_test,
-                        #                   color_hist=color_test,
-                        #                   y_limit=y_elem,
-                        #                   subset="test",
-                        #                   epoch=0)
-                        #     )
 
                         # evaluation of testing set with froc curve:
                         print("frocing +++")
@@ -650,12 +547,9 @@ def data_loaders(args, rng_ob, running_seed):
         # seed for the sampler:
         rng_ob=rng_ob
     )
-    # print("sampler_train length:", len(sampler_train))
 
     def worker_init(worker_id):
-        # np.random.seed(42 + worker_id)
         np.random.seed(running_seed)
-
 
     loader_train = DataLoader(
         dataset_train,
@@ -701,9 +595,6 @@ def datasets(args, running_seed):
     )
     print("Number of volumes in train dataset:", len(train))
 
-    # train_sample = train[0]
-    # img_train , lbl_train = train_sample
-
     valid = Dataset(
         csv_views=args.data_views,
         csv_bboxes=args.data_boxes,
@@ -719,9 +610,6 @@ def datasets(args, running_seed):
         dataframe_subset=df_valid
     )
     print("Number of volumes in validation dataset:", len(valid))
-
-    # valid_sample = train[0]
-    # img_valid, lbl_valid = valid_sample
 
     test = Dataset(
         csv_views=args.data_views,
@@ -745,7 +633,6 @@ def datasets(args, running_seed):
 def splitting_dataset(args, running_seed):
     df_train, df_valid, df_test, df_all = data_frame_subset(
         csv_views=args.data_views, csv_boxes=args.data_boxes,
-        # subset,
         seed=running_seed
     )
 
@@ -792,11 +679,7 @@ def froc(df, targets_nb):
     return tpr, fps, saved_thresholds
 
 def plot_loss_train(train_losses, color_train="darkorange", linestyle="-"):
-    # y_thresh = 5
-    # max_val = max(train_losses)
-    #
-    # y_offset = 5
-    # y_limit = max(y_thresh, max_val) + y_offset
+
     y_limit = 15
 
     # compute lengths of lists:
@@ -812,7 +695,6 @@ def plot_loss_train(train_losses, color_train="darkorange", linestyle="-"):
 
     plt.plot(train_x1, train_y1, label="training", color=color_train, linestyle=linestyle, lw=2)
 
-    # plt.ylim([0.0, y_thresh])
     plt.xlim([0.0, x_limit])
     plt.ylim([0.0, y_limit])
 
@@ -827,18 +709,12 @@ def plot_loss_train(train_losses, color_train="darkorange", linestyle="-"):
 
 def plot_loss_valid(train_losses, valid_losses, val_interv, color_valid, linestyle="-"):
 
-    # y_thresh = 5
-    # max_val = max(valid_losses)
-    #
-    # y_offset = 5
-    # y_limit = max(y_thresh, max_val) + y_offset
     y_limit = 15
 
     # compute lengths of lists:
     train_vals_len = len(train_losses)
     valid_vals_len = len(valid_losses)
 
-    # x_limit = max(train_vals_len, valid_vals_len)
     x_limit = train_vals_len
 
     fig = plt.figure(figsize=(10, 8))
@@ -868,11 +744,6 @@ def plot_loss_valid(train_losses, valid_losses, val_interv, color_valid, linesty
 
 def plot_losses(train_losses, valid_losses, val_interv, color_train, color_valid, linestyle="-"):
 
-    # y_thresh = 5
-    # max_val = max(max(train_losses), max(valid_losses))
-    #
-    # y_offset = 5
-    # y_limit = max(y_thresh, max_val) + y_offset
     y_limit = 15
 
     # compute lengths of lists:
@@ -953,7 +824,6 @@ def plot_tpr2_together(vals_train, vals_valid, val_interv, color_train, color_va
     plt.plot(values_train_x1, values_train_y1,label="training", color=color_train, linestyle=linestyle, lw=2)
     plt.plot(values_valid_x1, values_valid_y1,label="validation", color=color_valid, linestyle=linestyle, lw=2)
 
-    # plt.ylim([0.0, y_thresh])
     plt.xlim([0.0, x_limit])
     plt.ylim([0.0, 1])
 
@@ -968,11 +838,7 @@ def plot_tpr2_together(vals_train, vals_valid, val_interv, color_train, color_va
     return np.fromstring(s, np.uint8).reshape((height, width, 4))
 
 def plot_loss_learning_rate(values, color_val="darkorange", linestyle="-"):
-    # y_thresh = 5
-    # max_val = max(train_losses)
-    #
-    # y_offset = 5
-    # y_limit = max(y_thresh, max_val) + y_offset
+
     y_limit = max(values)
 
     # compute lengths of lists:
@@ -988,7 +854,6 @@ def plot_loss_learning_rate(values, color_val="darkorange", linestyle="-"):
 
     plt.plot(x_vals, y_vals, color=color_val, linestyle=linestyle, lw=2)
 
-    # plt.ylim([0.0, y_thresh])
     plt.xlim([0.0, x_limit])
     plt.ylim([0.0, y_limit])
 
@@ -1017,8 +882,6 @@ def plot_hist(values, color_hist, y_limit, subset, epoch, linestyle="-"):
             epoch) + "):")
     else:
         plt.title("Confidence Scores for " + str(subset) + " predicted boxes without thresholding:")
-
-    # plt.title("Confidence Scores for " + str(subset) + " predicted boxes without thresholding(epoch: " + str(epoch) + "):")
 
     plt.ylim([0, y_limit])
 
@@ -1112,9 +975,6 @@ def evaluate_batch(y_pred, y_true, froc_th=None):
     y_true = y_true.detach().cpu().numpy()
     df_eval = pd.DataFrame()
 
-    # # create a list to keep all the scores from a batch:
-    # scores_batch_pred = []
-
     # froc_th: None for train/validation/test sets
     if froc_th is None:
         pass
@@ -1125,25 +985,10 @@ def evaluate_batch(y_pred, y_true, froc_th=None):
         df_gt_boxes = pred2boxes(y_true[i], threshold=1.0)
         df_gt_boxes["GTID"] = np.random.randint(10e10) * (1 + df_gt_boxes["X"])
 
-        # df_pred_boxes, scores_label_pred = pred2boxes(y_pred[i])
-        # df_pred_boxes = pred2boxes(y_pred[i], froc_th=froc_th)
         df_pred_boxes = pred2boxes(y_pred[i])
         df_pred_boxes["PID"] = np.random.randint(10e12)
 
-        # iou_thresholds = np.arange(0.5, 0.95, 0.05)
-        # # iterate for all IoU threshold values:
-        # for iou_th in iou_thresholds:
-        #
-        #     # iterate for all predicted boxes:
-        #             for index, pred_box in df_pred_boxes.iterrows():
-        #                 tp_list = [
-        #                     (j, is_tp_using_IoU(pred_box, x_box, iou_th)) for j, x_box in df_gt_boxes.iterrows()
-        #                 ]
-        #
-
-
         df_pred_boxes["TP"] = 0
-        # df_pred_boxes["FP"] = 0
 
         if df_gt_boxes.shape[0] > 0:
             df_pred_boxes["GTID"] = np.random.choice(
@@ -1159,9 +1004,6 @@ def evaluate_batch(y_pred, y_true, froc_th=None):
                 df_pred_boxes.at[index, "GTID"] = df_gt_boxes.at[tp_index, "GTID"]
 
         df_eval = df_eval.append(df_pred_boxes, ignore_index=True, sort=False)
-
-        # # keep all the score_vals_label lists to the score_vals_batch:
-        # scores_batch_pred = scores_batch_pred + scores_label_pred
 
     # return df_eval, scores_batch_pred
     return df_eval
@@ -1179,9 +1021,7 @@ def pred2boxes(pred, threshold=None, froc_th=None):
     # * threshold:1.0, froc_th:None -> means we evaluate GT
     # * threshold:None, froc_th:None -> means we evaluate predictions on train/validation/test sets
     if threshold is None:
-        # threshold = min(0.001, np.max(obj_th) * 0.5)
         if froc_th is None:
-            # threshold = min(0.001, np.max(obj_th) * 0.5)
             threshold = 0
         else:
             threshold = froc_th
@@ -1209,7 +1049,6 @@ def pred2boxes(pred, threshold=None, froc_th=None):
     df_boxes = pd.DataFrame(df_dict)
     df_boxes.sort_values(by="Score", ascending=False, inplace=True)
 
-    # return df_boxes, scores_label
     return df_boxes
 
 if __name__ == "__main__":
@@ -1234,20 +1073,10 @@ if __name__ == "__main__":
         default=500,
         help="early stopping: number of epochs to wait for improvement (default: 25)",
     )
-    # parser.add_argument(
-    #     "--schedule-patience",
-    #     type=int,
-    #     default=30,
-    #     help="scheduler early stopping: number of epochs to wait for improvement before reduce the learning rate (default: 5)",
-    # )
     parser.add_argument(
         "--lr",
         type=float,
         default=0.001,
-        # default=0.0001,
-        # default=0.00001,
-        # default=0.005,
-        # default=0.01,
         help="initial learning rate (default: 0.001)"
     )
     parser.add_argument(
@@ -1310,14 +1139,6 @@ if __name__ == "__main__":
         default=None,
         help="experiment id to restore in-progress mlflow experiment (default: None)",
     )
-    # parser.add_argument(
-    #     "--mlruns-path",
-    #     type=str,
-    #     # default="data/mlruns/best_config_val_interval_1__sch_patience_30__factor_04",
-    #     # default="data/mlruns/best_config",
-    #     default="data/mlruns/best_config_whole",
-    #     help="path for mlflow results (default: /data/mlruns)",
-    # )
     parser.add_argument(
         "--slice-offset",
         type=int,

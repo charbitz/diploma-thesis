@@ -32,17 +32,9 @@ Augmentations during validation and test phase:
 def transforms(train=True):
     if train:
         return Compose([
-            # Normalize(mean=0.1271, std=0.1570),
             RandomScale(scale=0.1),
             RandomCrop((TomoDetectionDataset.img_height, TomoDetectionDataset.img_width)),
             RandomHorizFlip(prob=0.5),
-            # transforms.ToTensor(),
-
-            # NumpyToTensor(),
-            # transforms.Normalize(mean=[0.4592], std=[0.22561]),
-            # TensorToNumpy(),
-
-            # Normalize(mean=0.1271, std=0.1570),
             ])
     else:
         return RandomCrop(
@@ -57,7 +49,6 @@ class RandomScale(object):
         assert isinstance(scale, (float, tuple))
         if isinstance(scale, float):
             assert 0.0 < scale < 1.0
-            # self.scale = (1.0 - scale, 1.0 + scale)  # for scale = 0.2 then self.scale = [0.8, 1.2]
             self.scale = (1.0 - scale, 1.2 + scale)     # for scale = 0.1 then self.scale = [0.9 1.3]
         else:
             assert len(scale) == 2
@@ -67,13 +58,7 @@ class RandomScale(object):
     def __call__(self, sample):
         image, boxes = sample
 
-        # # don't augment normal cases
-        # if len(boxes["X"]) == 0:
-        #     return image, boxes
-
         sample_scale = np.random.rand()
-        # delete after:
-        # print("sample_scale:",sample_scale)
         sample_scale = sample_scale * (self.scale[1] - self.scale[0]) + self.scale[0]
 
         # filter when down-sampling the image to avoid aliasing artifacts:
@@ -124,6 +109,7 @@ class RandomCrop(object):
             x_min_box = np.min(np.array(boxes["X"]) - np.array(boxes["Width"]) // 2)
             y_max_box = np.max(np.array(boxes["Y"]) + np.array(boxes["Height"]) // 2)
             x_max_box = np.max(np.array(boxes["X"]) + np.array(boxes["Width"]) // 2)
+
             # min and max of coordinates for image cropping
             y_min = max(y_min, min(h, y_max_box + margin) - self.crop_size[0])
             x_min = max(x_min, min(w, x_max_box + margin) - self.crop_size[1])
@@ -138,9 +124,6 @@ class RandomCrop(object):
         if self.random:
             y_offset = np.random.randint(y_min, y_max)
             x_offset = np.random.randint(x_min, x_max)
-            # delete after:
-            # print("y_offset:",y_offset)
-            # print("x_offset:",x_offset)
 
             # check if the current image (of training set) has a normal volume (and not a biopsied one):
             if len(boxes["X"]) == 0:
@@ -158,7 +141,6 @@ class RandomCrop(object):
                 if img_laterality == "L":
                     x_offset = np.random.randint(0, margin_x)
                 else:
-                    # x_offset = np.random.randint(w - self.crop_size[1], w - self.crop_size[1] + margin_x)
                     x_offset = w - self.crop_size[1] - np.random.randint(0, margin_x)
                 # crop and return:
                 cropped = image[ y_offset: y_offset + self.crop_size[0],
@@ -210,8 +192,6 @@ class RandomCrop(object):
 
         boxes["X"] = [max(0, x - x_offset) for x in boxes["X"]]
         boxes["Y"] = [max(0, y - y_offset) for y in boxes["Y"]]
-        # if cropped.shape != (1056,672):
-        #     print("cropping in ", cropped.shape)
 
         return cropped, boxes
 
@@ -225,13 +205,9 @@ class RandomHorizFlip(object):
     def __call__(self, sample):
         image, boxes = sample
 
-        # for a given probability prob:
-        # delete after:
-
         probb = np.random.random()
-        # print("probb:",probb)
-        if probb < self.prob:
 
+        if probb < self.prob:
             # flip the image horizontally:
             flipped = np.fliplr(image)
 
@@ -244,15 +220,11 @@ class RandomHorizFlip(object):
                 box_x = [int(x) for x in boxes["X"]][iter]
                 box_w = [int(w) for w in boxes["Width"]][iter]
                 elem = image.shape[1] - box_x
-                # boxes["X"][iter] = elem
                 boxes["X"][iter] = elem if elem > 0 else 0
 
         #  if randomly not flipping the image:
         else:
             flipped = image
-
-        # print("flipped:", flipped.shape)
-        # print()
         return flipped, boxes
 
 class Normalize(object):
@@ -269,8 +241,6 @@ class Normalize(object):
     def __call__(self, sample):
         image, boxes = sample
 
-        # image = image.astype(np.float32)
-
         # # try to convert to range (0,1) first:
         image = image.astype(np.float32) / np.max(image)
         print("max value of image:", np.amax(image))
@@ -281,22 +251,9 @@ class Normalize(object):
         print("max value of image_norm:", torch.max(image_tens))
         print("min value of image_norm:", torch.min(image_tens))
 
-        # normalize image:
-        # image_norm = F.normalize(image_tens, self.mean, self.std)
-
         image_norm = (image_tens - self.mean) / self.std
         print("max value of image_norm:", torch.max(image_norm))
         print("min value of image_norm:", torch.min(image_norm))
-
-        # image_norm2 = (image - self.mean) / self.std
-        # print("max value of image_norm2:", max(image_norm2))
-        # print("min value of image_norm:2", min(image_norm2))
-
-
-        # x -= np.mean(x)  # the -= means can be read as x = x- np.mean(x)
-        #
-        # x /= np.std(x)
-
 
         # convert normalized tensor image to numpy image:
         image_np = image_norm.detach().cpu().numpy()
