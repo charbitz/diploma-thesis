@@ -65,8 +65,6 @@ def main(args):
 
             # save the image in the destination folder + /images:
 
-            # subsets_dir = "images_train/" if subset_df.shape==df_train.shape else "images_valid/" if subset_df.shape==df_valid.shape else "images_test/"
-
             images_dir = args.dest_dir + "images/" + subsets_dir
             os.makedirs(images_dir, exist_ok=True)
 
@@ -103,7 +101,6 @@ def main(args):
             # iterate for every bounding bx:
             for i in range(bboxes_num):
                 # extract class and dimensions x, y, width, height:
-                # class_id = 1 if df_gt_slice_boxes["Class"][i] == "cancer" else 0
                 class_id = 0
                 x_dim = int(df_gt_slice_boxes["X"][i])
                 y_dim = int(df_gt_slice_boxes["Y"][i])
@@ -135,74 +132,16 @@ def main(args):
                 # YOLOV5 TXT PyTorch Anotation format:
                 # 1 0.617 0.3594420600858369 0.114 0.17381974248927037
 
-                # with open(os.path.join(labels_dir, txt_filename), 'w') as f:
-                #     f.write(str(class_id) + " " + str(x_dim) + " " + str(y_dim) + " " + str(w_dim) + " " + str(h_dim))
-
-                # with open(os.path.join(labels_dir, txt_filename), "a+") as fp:
-                #     fp.write(str(class_id) + " " + str(x_dim) + " " + str(y_dim) + " " + str(w_dim) + " " + str(h_dim))
-
                 f.write(str(class_id) + " " + str(x_dim) + " " + str(y_dim) + " " + str(w_dim) + " " + str(h_dim) + "\n")
             f.close()
 
-        # # keep the normal volumes of this volume to a dataframe:
-        # normal_sub_df = subset_df.copy()
-        # normal_sub_df = normal_sub_df[(normal_sub_df["Normal"] == 1)]
-        #
-        # # call function to find unique triplets of patient/study/view,
-        # # this is the number of the volumes of the corresponding subset:
-        # unique_volumes = find_unique_triplets(df=normal_sub_df)
-        #
-        #
-        #
-        # # iterate through all quadruplets:
-        # for unique_vol in unique_volumes:
-        #     # extract the informations:
-        #     pid = unique_vol.split("_", 3)[0]
-        #     sid = unique_vol.split("_", 3)[1]
-        #     view = unique_vol.split("_", 3)[2]
-        #
-        #     print("pid:", pid)
-        #     print("sid:", sid)
-        #     print("view:", view)
-        #
-        #     # find the id of central slice:
-        #     source_dir = os.path.join(args.images, pid, sid)
-        #
-        #     source_dir_files_list = os.listdir(source_dir)
-        #
-        #     source_dir_files_list_volume = [x for x in source_dir_files_list if x[0:3] == view[0:3].upper()]
-        #
-        #     # this is the number of slices of the corresponding normal volume:
-        #     num_slices = len(source_dir_files_list_volume)
-        #
-        #     equiv_cslice_id = int(np.floor(num_slices / 2))
-        #
-        #     # save the image in the destination folder + /images:
-        #     # images_dir = args.dest_dir + "images_" + subsets_dir
-        #     images_dir = args.dest_dir + "images/" + subsets_dir
-        #     os.makedirs(images_dir, exist_ok=True)
-        #
-        #     image_name = "{}TomosynthesisReconstruction_{}_.png".format(view.upper(), equiv_cslice_id)
-        #     image_path = os.path.join(args.images, pid, sid, image_name)
-        #
-        #     image = imread(image_path)
-        #
-        #     # new filename:
-        #     img_filename = str(unique_vol) + "_" + str(equiv_cslice_id) + "_normal.png"
-        #     imsave(os.path.join(images_dir, img_filename), image)
-
-
         print("subset end")
-
 
     print("end")
 
 
-
-
 def find_unique_triplets(df):
     all_str_psv = []
-    # str_psv = str(df["PatientID"][0]) + str(df["StudyUID"][0]) + str(df["View"][0])
 
     for index, row in df.iterrows():
         all_str_psv.append(
@@ -236,13 +175,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Save the image dataset into a YOLOV5 annotation format."
     )
-    # parser.add_argument(
-    #     "--data-views",
-    #     type=str,
-    #     default="/mnt/seagate/DBT/manifest-1617905855234/BCS-DBT labels-new-v0.csv",
-    #     # default="/mnt/seagate/DBT/manifest-1617905855234/BCS-DBT labels-train-v2.csv",
-    #     help="csv file listing training views together with category label",
-    # )
     parser.add_argument(
         "--data-boxes",
         type=str,
@@ -273,7 +205,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dest-dir",
         default="/home/lazaros/PycharmProjects/yolo_new_clone/datasets/dbt_dataset_ONLY-BIOPSIED_masses_NO-CLASSES/",
-        # default="/home/lazaros/PycharmProjects/YOLOv5_Repo/datasets/dbt_dataset_WHOLE/",
         help="destination directory to save images and labels directories",
     )
 

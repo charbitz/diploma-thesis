@@ -68,7 +68,6 @@ def main(args):
                 print("here")
                 print("here")
 
-
             # save the image in the destination folder + /images:
 
             images_dir = args.dest_dir + "images/" + subsets_dir
@@ -96,17 +95,9 @@ def main(args):
                 image = imread(image_path)
 
                 # new filename:
-                # img_filename = str(unique_gt_sl) + ".png"
                 img_filename = str(pid) + "_" + str(sid) + "_" + str(view) + "_" + str(near_slice) + ".png"
 
                 imsave(os.path.join(images_dir, img_filename), image)
-
-            # # create a txt file in the destination folder + /labels:
-            # labels_dir = args.dest_dir + "labels/" + subsets_dir
-            # os.makedirs(labels_dir, exist_ok=True)
-            #
-            # txt_filename = str(unique_gt_sl) + ".txt"
-            # f = open(os.path.join(labels_dir, txt_filename), 'w')
 
             # keep to a dataframe the bounding boxes of this gt slice of the corresponding DICOM:
             df_gt_slice_boxes = df_boxes.loc[(df_boxes['PatientID'] == pid)
@@ -169,9 +160,6 @@ def main(args):
                     f_ns.write(str(class_id) + " " + str(x_dim) + " " + str(y_dim) + " " + str(w_dim) + " " + str(h_dim) + "\n")
                 f_ns.close()
 
-
-
-
         # # num of biopsied gt slices:
         bio_single_slices = len(unique_gt_slices)
 
@@ -201,14 +189,12 @@ def main(args):
             print("view:", view)
 
             # save the image in the destination folder + /images:
-            # images_dir = args.dest_dir + "images_" + subsets_dir
             images_dir = args.dest_dir + "images/" + subsets_dir
             os.makedirs(images_dir, exist_ok=True)
 
             # find the id of central slice:
             source_dir = os.path.join(args.images, pid, sid)
             source_dir_files_list = os.listdir(source_dir)
-            # source_dir_files_list_volume = [x for x in source_dir_files_list if x[0:3] == view[0:3].upper()]
             source_dir_files_list_volume = [x for x in source_dir_files_list if x.split("T", 2)[0] == view.upper()]
 
             # this is the number of slices of the corresponding normal volume:
@@ -229,23 +215,17 @@ def main(args):
                 image = imread(image_path)
 
                 # new filename:
-                # img_filename = str(unique_gt_sl) + ".png"
                 img_filename = str(pid) + "_" + str(sid) + "_" + str(view) + "_" + str(near_slice) + "_normal.png"
 
                 imsave(os.path.join(images_dir, img_filename), image)
 
-
         print("subset end")
-
 
     print("end")
 
 
-
-
 def find_unique_triplets(df):
     all_str_psv = []
-    # str_psv = str(df["PatientID"][0]) + str(df["StudyUID"][0]) + str(df["View"][0])
 
     for index, row in df.iterrows():
         all_str_psv.append(
@@ -279,13 +259,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Save the image dataset into a YOLOV5 annotation format."
     )
-    # parser.add_argument(
-    #     "--data-views",
-    #     type=str,
-    #     default="/mnt/seagate/DBT/manifest-1617905855234/BCS-DBT labels-new-v0.csv",
-    #     # default="/mnt/seagate/DBT/manifest-1617905855234/BCS-DBT labels-train-v2.csv",
-    #     help="csv file listing training views together with category label",
-    # )
     parser.add_argument(
         "--data-boxes",
         type=str,
@@ -315,7 +288,6 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--dest-dir",
-        # default="/home/lazaros/PycharmProjects/YOLOv5_Repo/datasets/dbt_dataset_ONLY-BIOPSIED/",
         default="/home/lazaros/PycharmProjects/yolo_new_clone/datasets/dbt_dataset_masses_multiple_slices_WHOLE-NORMAL-10/",
         help="destination directory to save images and labels directories",
     )
