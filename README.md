@@ -50,4 +50,5 @@ Here ...
 Technique 1: 
 Pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on DBT data 
 
+Using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test setsTechnique 2:
 Using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test sets
