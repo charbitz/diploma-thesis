@@ -1,6 +1,6 @@
 # Mass detection in Digital Breast Tomosynthesis
 
-This is the code repository of my diploma thesis. The was not the original repository. In this specific repository the final files were uploaded for demonstration purposes.
+This is the code repository of my diploma thesis. The was not the original repository. In this specific repository the final files were uploaded for demonstration purposes. In this README file you can see a summary about the **image databases**, **model architectures** and **learning techniques** that were selected for the final implemetation of the problem of _mass detection_. 
 
 ## Image Databases:
 
