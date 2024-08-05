@@ -12,31 +12,33 @@ This is the code repository of my Diploma Thesis. The was not the original repos
 
 ### * Apply a YOLO network in DenseNet architecture on DBT data.
 
-Parameters of dataset splitting:
+Parameters of dataset splitting into subsets:
 - training: 50%, validation: 20%, test: 10%
 - splitting based on patients, in order not to have two different views of the same patient's mass in two different sets
 
-Parameters of training:
--here
+Hyper-parameter tuning:
+- epochs
+- patience
+- initial learning rate
+- validation interval
+- schedule patience
+- factor of learning rate
 
 Preprocessing in order to prepare the dataset:
 - image downscaling
 - image segmentation
 - getting largest connected component
 
-Data augmentations while training:
+Data augmentations while training the YOLO model in DenseNet architecture:
 - random scaling in [0.9 1.3]
 - random area cropping with a way that contains though the ground truth bounding box, final fixed image dimensions: (1056, 672)
 - random horrizontal flipping with a probability of 50%
-
 
 ### * Apply a YOLOv5 network on DBT and INBreast data.
 
 The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). 
 
-Here ...
-
-### * Apply preprocessing on both image databases in order to get better model performance:
+Apply preprocessing on both image databases in order to get better model performance:
 
 - gaussian filtering
 - image segmentation using OTSU thresholding
@@ -44,6 +46,11 @@ Here ...
 - truncation normalization
 - Contrast Limited Adaptive Histogram Equalization
 - image synthesizing into RGB format
+
+Data augmentations while training the YOLOv5 model:
+- random image translation of 20%
+- random horrizontal flipping with a probability of 50%
+- random vertical flipping with a probability of 50%
 
 ### * Apply transfer learning techniques on YOLOv5 model:
 
@@ -65,7 +72,7 @@ Files for training YOLO network in DenseNet architecture on DBT data:
 - [subsets_split.py](https://github.com/charbitz/diploma-thesis/blob/main/subsets_split.py)
 - [train_best_model.py](https://github.com/charbitz/diploma-thesis/blob/main/train_best_model.py)
 
-Files for creating DBT and INBreast datasets in YOLOv5 annotation format:
+### * Files for creating DBT and INBreast datasets in YOLOv5 annotation format:
 
 For cases with only biopsied masses:
 - [reorganize_dataset_subsets_masses.py](https://github.com/charbitz/diploma-thesis/blob/main/reorganize_dataset_subsets_masses.py)
