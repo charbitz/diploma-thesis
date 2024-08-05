@@ -53,4 +53,28 @@ Pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on
 
 
 Technique 2:
-Using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test sets
+Using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test sets.
+
+## File Description:
+
+Files for training YOLO network in DenseNet architecture on DBT data:
+- [dense_yolo.py](https://github.com/charbitz/diploma-thesis/blob/main/dense_yolo.py)
+- [dataset.py](https://github.com/charbitz/diploma-thesis/blob/main/dataset.py)
+- [loss.py](https://github.com/charbitz/diploma-thesis/blob/main/loss.py)
+- [preprocess.py](https://github.com/charbitz/diploma-thesis/blob/main/preprocess.py)
+- [transform.py](https://github.com/charbitz/diploma-thesis/blob/main/transform.py)
+- [sampler.py ](https://github.com/charbitz/diploma-thesis/blob/main/sampler.py)
+- [subsets_split.py](https://github.com/charbitz/diploma-thesis/blob/main/subsets_split.py)
+- [train_best_model.py](https://github.com/charbitz/diploma-thesis/blob/main/train_best_model.py)
+
+Files for creating DBT and INBreast datasets in YOLOv5 annotation format:
+
+For cases with only biopsied cases:
+- [reorganize_dataset_subsets_masses.py](https://github.com/charbitz/diploma-thesis/blob/main/reorganize_dataset_subsets_masses.py)
+- [dbt_dataset_ONLY-BIOPSIED_masses_NO-CLASSES.yaml](https://github.com/charbitz/diploma-thesis/blob/main/dbt_dataset_ONLY-BIOPSIED_masses_NO-CLASSES.yaml)
+
+For cases with both biopsied and normal cases:
+- [reorganize_dataset_subsets_masses_multiple_slices_normal_10_perc.py](https://github.com/charbitz/diploma-thesis/blob/main/reorganize_dataset_subsets_masses_multiple_slices_normal_10_perc.py)
+- [dbt_dataset_multiple_slices_masses_NO-CLASSES_WHOLE-NORMAL-10.yaml](https://github.com/charbitz/diploma-thesis/blob/main/train_best_model.py)
+](https://github.com/charbitz/diploma-thesis/blob/main/dbt_dataset_multiple_slices_masses_NO-CLASSES_WHOLE-NORMAL-10.yaml)
+
