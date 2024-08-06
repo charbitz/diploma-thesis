@@ -83,7 +83,7 @@ For cases with both biopsied and normal masses:
 - [dbt_dataset_multiple_slices_masses_NO-CLASSES_WHOLE-NORMAL-10.yaml](https://github.com/charbitz/diploma-thesis/blob/main/dbt_dataset_multiple_slices_masses_NO-CLASSES_WHOLE-NORMAL-10.yaml)
 
 
-## Attribution
+## Attribution:
 
 So finally this project includes code from the following repositories:
 - [duke-dbt-data](https://github.com/mazurowski-lab/duke-dbt-data) by [mateuszbuda](https://github.com/mateuszbuda)
