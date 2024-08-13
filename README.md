@@ -1,4 +1,4 @@
-# Mass detection in Digital Breast Tomosynthesis
+# Mass detection in Digital Breast Tomosynthesis Images
 
 This is the code repository of my Diploma Thesis. The was not the original repository. In this specific repository the final files were uploaded for demonstration purposes. In this README file you can see a summary about the **image databases**, **model architectures** and **learning techniques** that were selected for the final implemetation of the problem of _mass detection_. 
 
@@ -90,3 +90,10 @@ So finally this project includes code from the following repositories:
 - [duke-dbt-detection](https://github.com/mateuszbuda/duke-dbt-detection) by [mateuszbuda](https://github.com/mateuszbuda)
 - [yolov5](https://github.com/ultralytics/yolov5) by [ultralytics](https://github.com/ultralytics)
 - [breast_mass_detection](https://github.com/jordanvaneetveldt/breast_mass_detection) by [jordanvaneetveldt](https://github.com/jordanvaneetveldt)
+
+<!-- try table -->
+
+| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Row 1    | Data 1   | Data 2   |
+| Row 2    | Data 3   | Data 4   |
