@@ -82,6 +82,24 @@ For cases with both biopsied and normal masses:
 - [reorganize_dataset_subsets_masses_multiple_slices_normal_10_perc.py](https://github.com/charbitz/diploma-thesis/blob/main/reorganize_dataset_subsets_masses_multiple_slices_normal_10_perc.py)
 - [dbt_dataset_multiple_slices_masses_NO-CLASSES_WHOLE-NORMAL-10.yaml](https://github.com/charbitz/diploma-thesis/blob/main/dbt_dataset_multiple_slices_masses_NO-CLASSES_WHOLE-NORMAL-10.yaml)
 
+## Results of Implementations:
+
+### Results of DenseYOLO network:
+
+* Only Biopsied images:
+
+|                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
+|-----------------|---------------------|-------------------|--------|-----------------|-----------|
+| experiment 1    |  5                  |  10               |  0.5   |  0.66           |     0.7192|
+| experiment 2    | 1                   | 30                | 0.9    | 0.66            |    0.6666 |
+| experiment 3    | 1                   | 50                | 0.5    | 0.624           |    0.6666 |
+| experiment 4    | 1                   | 50                | 0.5    | 0.64            |    0.6596 |
+| experiment 5    | 5                   | 10                | 0.1    | 0.638           |    0.6491 |
+| experiment 6    | 1                   | 50                | 0.3    | 0.6511          |    0.6257 |
+| experiment 7    | 1                   | 30                | 0.4    | 0.6             |    0.5964 |
+| experiment 8    | 5                   | 10                | 0.3    | 0.58            |    0.5877 |
+ 
+
 
 ## Attribution:
 
