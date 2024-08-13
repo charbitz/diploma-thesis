@@ -34,7 +34,7 @@ Data augmentations while training the YOLO model in DenseNet architecture:
 - random area cropping with a way that contains though the ground truth bounding box, final fixed image dimensions: (1056, 672)
 - random horrizontal flipping with a probability of 50%
 
-### * Apply a YOLOv5 network on DBT and INBreast data.
+### Apply a YOLOv5 network on DBT and INBreast data.
 
 The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). 
 
@@ -52,7 +52,7 @@ Data augmentations while training the YOLOv5 model:
 - random horrizontal flipping with a probability of 50%
 - random vertical flipping with a probability of 50%
 
-### * Apply transfer learning techniques on YOLOv5 model:
+### Apply transfer learning techniques on YOLOv5 model:
 
 Technique 1: 
 Pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on DBT data.
@@ -72,7 +72,7 @@ Files for training YOLO network in DenseNet architecture on DBT data:
 - [subsets_split.py](https://github.com/charbitz/diploma-thesis/blob/main/subsets_split.py)
 - [train_best_model.py](https://github.com/charbitz/diploma-thesis/blob/main/train_best_model.py)
 
-### * Files for creating DBT and INBreast datasets in YOLOv5 annotation format:
+### Files for creating DBT and INBreast datasets in YOLOv5 annotation format:
 
 For cases with only biopsied masses:
 - [reorganize_dataset_subsets_masses.py](https://github.com/charbitz/diploma-thesis/blob/main/reorganize_dataset_subsets_masses.py)
