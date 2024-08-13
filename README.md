@@ -86,7 +86,7 @@ For cases with both biopsied and normal masses:
 
 ### Results of DenseYOLO network:
 
-#### Only Biopsied images:
+Only Biopsied images:
 
 |                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
 |-----------------|---------------------|-------------------|--------|-----------------|-----------|
@@ -99,7 +99,7 @@ For cases with both biopsied and normal masses:
 | experiment 7    |         1           |        30         |  0.4   |       0.6       |  0.5964   |
 | experiment 8    |         5           |        10         |  0.3   |       0.58      |  0.5877   |   
 
-#### Images from the whole DBT set:
+Images from the whole DBT set:
 
 |                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
 |-----------------|---------------------|-------------------|--------|-----------------|-----------|
