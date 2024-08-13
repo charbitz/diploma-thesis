@@ -93,7 +93,9 @@ So finally this project includes code from the following repositories:
 
 <!-- try table -->
 
-| Header 1 | Header 2 | Header 3 |
-|----------|----------|----------|
-| Row 1    | Data 1   | Data 2   |
-| Row 2    | Data 3   | Data 4   |
+|          | Header 2 | Header 3 | Header 3 | Header 3 |
+|----------|----------|----------|----------|----------|
+| Row 1    | Data 1   | Data 2   | Data 2   | Data 2   |
+| Row 2    | Data 3   | Data 4   | Data 4   | Data 4   |
+| Row 2    | Data 3   | Data 4   | Data 4   | Data 4   |
+| Row 2    | Data 3   | Data 4   | Data 4   | Data 4   |
