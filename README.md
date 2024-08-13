@@ -99,6 +99,19 @@ For cases with both biopsied and normal masses:
 | experiment 7    |         1           |        30         |  0.4   |       0.6       |  0.5964   |
 | experiment 8    |         5           |        10         |  0.3   |       0.58      |  0.5877   |   
 
+* Images from the wholew DBT set:
+
+|                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
+|-----------------|---------------------|-------------------|--------|-----------------|-----------|
+| experiment 9    |         5           |        10         |  0.5   |       0.44      |  0.3684   |
+| experiment 10   |         1           |        30         |  0.9   |       0.66      |  0.5748   |
+| experiment 11   |         1           |        50         |  0.5   |       0.66      |  0.4584   |
+| experiment 12   |         1           |        50         |  0.5   |       0.6880    |  0.5748   |
+| experiment 13   |         5           |        10         |  0.1   |       0.62      |  0.6052   |
+| experiment 14   |         1           |        50         |  0.3   |       0.66      |  0.5789   |
+| experiment 15   |         1           |        30         |  0.4   |       0.7       |  0.5438   |
+| experiment 16   |         5           |        10         |  0.3   |       0.59      |  0.52     |   
+
 ## Attribution:
 
 So finally this project includes code from the following repositories:
@@ -106,12 +119,3 @@ So finally this project includes code from the following repositories:
 - [duke-dbt-detection](https://github.com/mateuszbuda/duke-dbt-detection) by [mateuszbuda](https://github.com/mateuszbuda)
 - [yolov5](https://github.com/ultralytics/yolov5) by [ultralytics](https://github.com/ultralytics)
 - [breast_mass_detection](https://github.com/jordanvaneetveldt/breast_mass_detection) by [jordanvaneetveldt](https://github.com/jordanvaneetveldt)
-
-<!-- try table -->
-
-|          | Header 2 | Header 3 | Header 3 | Header 3 |
-|----------|----------|----------|----------|----------|
-| Row 1    | Data 1   | Data 2   | Data 2   | Data 2   |
-| Row 2    | Data 3   | Data 4   | Data 4   | Data 4   |
-| Row 2    | Data 3   | Data 4   | Data 4   | Data 4   |
-| Row 2    | Data 3   | Data 4   | Data 4   | Data 4   |
