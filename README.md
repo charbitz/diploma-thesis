@@ -112,6 +112,16 @@ Images from the whole DBT set:
 | experiment 15   |         1           |        30         |  0.4   |       0.7       |  0.5438   |
 | experiment 16   |         5           |        10         |  0.3   |       0.59      |  0.52     |   
 
+### Results of YOLOv5 network:
+
+Images with preprocessing:
+
+|                        | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
+|------------------------|------------------|------------|---------------------|---------------|
+| DBT                    |       0.414      |    0.372   |        0.191        |     0.141     |
+| INbreast in train set  |       0.429      |    0.266   |        0.177        |     0.108     |
+| pretrained on INbreast |       0.409      |    0.361   |        0.178        |     0.133     |
+
 ## Attribution:
 
 So finally this project includes code from the following repositories:
