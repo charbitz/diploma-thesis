@@ -89,7 +89,7 @@ For cases with both biopsied and normal masses:
 Only Biopsied images:
 
 |                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
-|-----------------|---------------------|-------------------|--------|-----------------|-----------|
+|:---------------:|:-------------------:|:-----------------:|:------:|:---------------:|:---------:|
 | experiment 1    |         5           |        10         |  0.5   |       0.66      |  0.7192   |
 | experiment 2    |         1           |        30         |  0.9   |       0.66      |  0.6666   |
 | experiment 3    |         1           |        50         |  0.5   |       0.624     |  0.6666   |
@@ -102,7 +102,7 @@ Only Biopsied images:
 Images from the whole DBT set:
 
 |                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
-|-----------------|---------------------|-------------------|--------|-----------------|-----------|
+|:---------------:|:-------------------:|:-----------------:|:------:|:---------------:|:---------:|
 | experiment 9    |         5           |        10         |  0.5   |       0.44      |  0.3684   |
 | experiment 10   |         1           |        30         |  0.9   |       0.66      |  0.5748   |
 | experiment 11   |         1           |        50         |  0.5   |       0.66      |  0.4584   |
@@ -117,7 +117,7 @@ Images from the whole DBT set:
 Images with preprocessing:
 
 |                        | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
-|------------------------|------------------|------------|---------------------|---------------|
+|:----------------------:|:----------------:|:----------:|:-------------------:|:-------------:|
 | DBT                    |       0.414      |    0.372   |        0.191        |     0.141     |
 | INbreast in train set  |       0.429      |    0.266   |        0.177        |     0.108     |
 | pretrained on INbreast |       0.409      |    0.361   |        0.178        |     0.133     |
