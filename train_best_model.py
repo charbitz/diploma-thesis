@@ -28,53 +28,48 @@ from subsets_split import data_frame_subset
 
 def main(args):
 
-    run_example = "Run_90"
+    run_example = "Exp_1"
 
     # choosing the parameters for the corresponding run:
-    if run_example == "Run_90":
-        validation_interval_ex = 1
-        schedule_patience_ex = 30
-        factor_ex = 0.4
-    elif run_example == "Run_58":
+    if run_example == "Exp_1":
+        validation_interval_ex = 5
+        schedule_patience_ex = 10
+        factor_ex = 0.5
+    elif run_example == "Exp_2":
         validation_interval_ex = 1
         schedule_patience_ex = 30
         factor_ex = 0.9
-    elif run_example == "Run_102":
-        validation_interval_ex = 5
-        schedule_patience_ex = 10
-        factor_ex = 0.3
-    elif run_example == "Run_6":
-        validation_interval_ex = 1
-        schedule_patience_ex = 50
-        factor_ex = 0.1
-    elif run_example == "Run_22":
-        validation_interval_ex = 1
-        schedule_patience_ex = 5
-        factor_ex = 0.5
-    elif run_example == "Run_34":
-        validation_interval_ex = 5
-        schedule_patience_ex = 10
-        factor_ex = 0.1
-    elif run_example == "Run_38":
-        validation_interval_ex = 1
-        schedule_patience_ex = 50
-        factor_ex = 0.3
-    elif run_example == "Run_42":
+    elif run_example == "Exp_3":
         validation_interval_ex = 1
         schedule_patience_ex = 50
         factor_ex = 0.5
+    elif run_example == "Exp_4":
+        validation_interval_ex = 1
+        schedule_patience_ex = 50
+        factor_ex = 0.1
+    elif run_example == "Exp_5":
+        validation_interval_ex = 5
+        schedule_patience_ex = 10
+        factor_ex = 0.1
+    elif run_example == "Exp_6":
+        validation_interval_ex = 1
+        schedule_patience_ex = 50
+        factor_ex = 0.3
+    elif run_example == "Exp_7":
+        validation_interval_ex = 1
+        schedule_patience_ex = 30
+        factor_ex = 0.4
+    elif run_example == "Exp_8":
+        validation_interval_ex = 5
+        schedule_patience_ex = 10
+        factor_ex = 0.3
     elif run_example == "debugging":
-        validation_interval_ex = 1
-        schedule_patience_ex = 5
-        factor_ex = 0.3
-
-    elif run_example == "Run_90_factor_09":
         validation_interval_ex = 1
         schedule_patience_ex = 30
         factor_ex = 0.9
     # this is for no specific run examples. Not so recommended to use:
     else:
-        validation_interval_ex = 5
+        validation_interval_ex = 1
         schedule_patience_ex = 10
         factor_ex = 0.1
 
