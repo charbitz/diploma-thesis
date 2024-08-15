@@ -107,7 +107,7 @@ From experiment 1:
 ![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_valid.png)   |  ![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_test.png)
 
  TPR2 training and TPR2 validation per epoch 
-:-------------------------:
+|:-------------------------:|
 ![]<img src="images/exp1_tpr2_train_%26_valid.png" width="600" />
 
 
