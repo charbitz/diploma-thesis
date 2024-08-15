@@ -102,7 +102,7 @@ Only Biopsied images:
 | experiment 8    |         5           |        10         |  0.3   |       0.58      |  0.5877   |   
 
 From experiment 1:
- | 
+ TPR2 validation | TPR2 test 
 :-------------------------:|:-------------------------:
 ![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_valid.png)   |  ![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_test.png)
 
