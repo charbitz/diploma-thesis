@@ -101,7 +101,13 @@ Only Biopsied images:
 | experiment 7    |         1           |        30         |  0.4   |       0.6       |  0.5964   |
 | experiment 8    |         5           |        10         |  0.3   |       0.58      |  0.5877   |   
 
-Images from the whole DBT set:
+From experiment 1:
+ | 
+:-------------------------:|:-------------------------:
+![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_valid.png)   |  ![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_test.png)
+
+
+Cases with both biopsied and normal masses:
 
 |                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
 |:---------------:|:-------------------:|:-----------------:|:------:|:---------------:|:---------:|
