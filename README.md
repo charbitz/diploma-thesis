@@ -88,7 +88,7 @@ For cases with both biopsied and normal masses:
 
 ### Results of DenseYOLO network:
 
-Only Biopsied images:
+Cases with only biopsied masses:
 
 |                 | validation interval | schedule patience | factor | TPR2 validation | TPR2 test |
 |:---------------:|:-------------------:|:-----------------:|:------:|:---------------:|:---------:|
