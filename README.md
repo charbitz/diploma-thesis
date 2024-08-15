@@ -111,7 +111,7 @@ For example for experiment 1:
 <h3 align="center">TPR2 of training set and TPR2 of validation set per epoch</h3>
 
 <p align="center">
-  <img src="images/exp1_tpr2_train_%26_valid.png" width="600" />
+  <img src="images/exp1_tpr2_train_%26_valid.png" width="500" />
 </p>
 
 Cases with both biopsied and normal masses:
