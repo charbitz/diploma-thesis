@@ -124,19 +124,19 @@ Cases with both biopsied and normal masses:
 
 Images with preprocessing:
 
-|                        | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
-|:----------------------:|:----------------:|:----------:|:-------------------:|:-------------:|
-| DBT                    |       0.414      |    0.372   |        0.191        |     0.141     |
-| INbreast in train set  |       0.429      |    0.266   |        0.177        |     0.108     |
-| pretrained on INbreast |       0.409      |    0.361   |        0.178        |     0.133     |
+|                                  | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
+|:--------------------------------:|:----------------:|:----------:|:-------------------:|:-------------:|
+| DBT                              |       0.414      |    0.372   |        0.191        |     0.141     |
+| TF no. 1: INbreast in train set  |       0.429      |    0.266   |        0.177        |     0.108     |
+| TF no. 2: pretrained on INbreast |       0.409      |    0.361   |        0.178        |     0.133     |
 
 Images without preprocessing:
 
-|                        | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
-|:----------------------:|:----------------:|:----------:|:-------------------:|:-------------:|
-| DBT                    |       0.434      |   0.441    |        0.176        |     0.188     |
-| INbreast in train set  |       0.458      |   0.395    |        0.204        |     0.185     |
-| pretrained on INbreast |       0.368      |   0.452    |        0.17         |     0.185     |
+|                                  | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
+|:--------------------------------:|:----------------:|:----------:|:-------------------:|:-------------:|
+| DBT                              |       0.434      |   0.441    |        0.176        |     0.188     |
+| TF no. 1: INbreast in train set  |       0.458      |   0.395    |        0.204        |     0.185     |
+| TF no. 2: pretrained on INbreast |       0.368      |   0.452    |        0.17         |     0.185     |
 
 ## Attribution:
 
