@@ -1,0 +1,14 @@
+artifact_uri: data/mlruns/best_config/6/e16f986ef8014d21a30f5c8fe8727ab5/artifacts
+end_time: 1658922001786
+entry_point_name: ''
+experiment_id: 6
+lifecycle_stage: active
+name: ''
+run_uuid: e16f986ef8014d21a30f5c8fe8727ab5
+source_name: /home/lazaros/PycharmProjects/DBT_Detection/dbt-detection/train_best_model.py
+source_type: 4
+source_version: 70fcb0920c3110f09c40533ae92c324c7b942506
+start_time: 1658918496683
+status: 3
+tags: []
+user_id: lazaros

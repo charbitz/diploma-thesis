@@ -1,0 +1,1 @@
+{'batch_size': 16, 'epochs': 2000, 'patience': 500, 'init_lr': 0.001, 'schedule_patience': 50, 'slice_offset': 0, 'images': '/mnt/seagate/DBT/TomoImagesPP_WholeDataset_NSR', 'only_biopsied': True, 'workers': 4, 'seed': 311, 'validation_interval': 1}

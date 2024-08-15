@@ -1,0 +1,4 @@
+artifact_location: data/mlruns/best_config/42
+experiment_id: 42
+lifecycle_stage: active
+name: '45'
