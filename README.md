@@ -106,7 +106,7 @@ From experiment 1:
 :-------------------------:|:-------------------------:
 <img src="images/exp1_froc_valid.png" height="300" />   |  <img src="images/exp1_froc_test.png" height="300" />
 
-<h3 align="center">TPR2 training and TPR2 validation per epoch</h3>
+<h3 align="center">TPR2 of training set and TPR2 of validation set per epoch</h3>
 
 <p align="center">
   <img src="images/exp1_tpr2_train_%26_valid.png" width="600" />
