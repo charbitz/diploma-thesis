@@ -104,7 +104,7 @@ Cases with only biopsied masses:
 From experiment 1:
  TPR2 validation | TPR2 test 
 :-------------------------:|:-------------------------:
-![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_valid.png)   |  ![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_froc_test.png)
+![]<img src="images/exp1_froc_valid.png" height="400" />   |  ![]<img src="images/exp1_froc_test.png" height="400" />
 
  TPR2 training and TPR2 validation per epoch 
 |:-------------------------:|
