@@ -102,7 +102,7 @@ Cases with only biopsied masses:
 | experiment 8    |         5           |        10         |  0.3   |       0.58      |  0.5877   |   
 
 From experiment 1:
- TPR2 of validation set | TPR2 of test set 
+ TPR of validation set | TPR of test set 
 :-------------------------:|:-------------------------:
 <img src="images/exp1_froc_valid.png" height="300" />   |  <img src="images/exp1_froc_test.png" height="300" />
 
