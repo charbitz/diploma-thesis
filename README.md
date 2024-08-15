@@ -104,11 +104,11 @@ Cases with only biopsied masses:
 [Here](https://github.com/charbitz/diploma-thesis/tree/main/data/mlruns) you can find the tuning results of all the above experiments in cases with only biopsied masses. For each experiment you can find artifacts like training graphs, some metrics and training params and also the weights of the DenseYolo model that correspond to the best tuning.
 
 For example for experiment 1:
- TPR of validation set | TPR of test set 
+ TPR of validation set: | TPR of test set: 
 :-------------------------:|:-------------------------:
 <img src="images/exp1_froc_valid.png" height="300" />   |  <img src="images/exp1_froc_test.png" height="300" />
 
-<h3 align="center">TPR2 of training set and TPR2 of validation set per epoch</h3>
+<h3 align="center">TPR2 of training set and TPR2 of validation set per epoch:</h3>
 
 <p align="center">
   <img src="images/exp1_tpr2_train_%26_valid.png" width="500" />
