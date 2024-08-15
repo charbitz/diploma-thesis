@@ -108,7 +108,7 @@ From experiment 1:
 
  TPR2 training and TPR2 validation per epoch 
 :-------------------------:
-![](https://github.com/charbitz/diploma-thesis/blob/main/images/exp1_tpr2_train_%26_valid.png)
+![]<img src="images/exp1_tpr2_train_%26_valid.png" width="300" />
 
 
 Cases with both biopsied and normal masses:
