@@ -101,7 +101,9 @@ Cases with only biopsied masses:
 | experiment 7    |         1           |        30         |  0.4   |       0.6       |  0.5964   |
 | experiment 8    |         5           |        10         |  0.3   |       0.58      |  0.5877   |   
 
-From experiment 1:
+[Here](https://github.com/charbitz/diploma-thesis/tree/main/data/mlruns) you can find the tuning results of all the above experiments. For each experiment you can find artifacts like training graphs, some metrics and training params and also the weights of the DenseYolo model that correspond to the best tuning.
+
+For example for experiment 1:
  TPR of validation set | TPR of test set 
 :-------------------------:|:-------------------------:
 <img src="images/exp1_froc_valid.png" height="300" />   |  <img src="images/exp1_froc_test.png" height="300" />
