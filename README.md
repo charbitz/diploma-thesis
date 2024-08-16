@@ -184,7 +184,7 @@ DBT data.
 </p>
 
 <p align="center">
-  <img src="images/dbt_sample_no_pp.jpg" height="300" /> | <img src="images/inbreast_sample_no_pp.jpg" height="300" />
+  <img src="images/dbt_sample_no_pp.jpg" height="300" />  <img src="images/inbreast_sample_no_pp.jpg" height="300" />
 </p>
 
 <p align="center">
@@ -192,7 +192,7 @@ DBT data.
 </p>
 
 <p align="center">
-  <img src="images/dbt_sample_pp.jpg" height="300" /> | <img src="images/inbreast_sample_pp.jpg" height="300" />
+  <img src="images/dbt_sample_pp.jpg" height="300" />  <img src="images/inbreast_sample_pp.jpg" height="300" />
 </p>
 ## Attribution:
 
