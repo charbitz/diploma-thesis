@@ -179,6 +179,8 @@ those of the INbreast data and those of the DBT data and this case since
 the two kinds of features were different, it was no different from having only
 DBT data.
 
+You can review below the details of two sample images from both databases, as well as the two scenarios, with and without preprocessing:
+
 <div align="center">
 
 | DBT image no PP: | INBreast image no PP: |
