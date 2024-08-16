@@ -67,10 +67,10 @@ Data augmentations while training the YOLOv5 model:
 ### Apply transfer learning techniques on YOLOv5 model:
 
 Technique 1: 
-Using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test sets.
+Pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on DBT data.
 
 Technique 2:
-Pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on DBT data.
+Using all INBreast and part of DBT data on training set and then using the rest of DBT data on validation and test sets.
 
 #### Tuning performance criteria:
 * mAP (Mean Average Precision).
@@ -155,16 +155,30 @@ Images with preprocessing:
 |                                  | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
 |:--------------------------------:|:----------------:|:----------:|:-------------------:|:-------------:|
 | DBT                              |       0.414      |    0.372   |        0.191        |     0.141     |
-| TF no. 1: INbreast in train set  |       0.429      |    0.266   |        0.177        |     0.108     |
-| TF no. 2: pretrained on INbreast |       0.409      |    0.361   |        0.178        |     0.133     |
+| TF no. 1: pretrained on INbreast |       0.409      |    0.361   |        0.178        |     0.133     |
+| TF no. 2: INbreast in train set  |       0.429      |    0.266   |        0.177        |     0.108     |
 
 Images without preprocessing:
 
 |                                  | mAP50 validation | mAP50 test | mAP50-95 validation | mAP50-95 test |
 |:--------------------------------:|:----------------:|:----------:|:-------------------:|:-------------:|
 | DBT                              |       0.434      |   0.441    |        0.176        |     0.188     |
-| TF no. 1: INbreast in train set  |       0.458      |   0.395    |        0.204        |     0.185     |
-| TF no. 2: pretrained on INbreast |       0.368      |   0.452    |        0.17         |     0.185     |
+| TF no. 1: pretrained on INbreast |       0.368      |   0.452    |        0.17         |     0.185     |
+| TF no. 2: INbreast in train set  |       0.458      |   0.395    |        0.204        |     0.185     |
+
+While transfer learning is a method that could potentially lead to improved outcomes, it did not prove to be effective in this case.
+
+The masses in the INbreast images were more distinct, so the network had learned
+to extract features and detect distinct masses and when asked to identify
+masses from DBT images that had an extra difficulty because of the dense tissue, it didn't make much difference what knowledge the network had already learned.
+
+For the same reason the training of the
+YOLOv5, augmented with INbreast data in the training set, did not help
+as the network in this case was learning two kinds of features together,
+those of the INbreast data and those of the DBT data and this case since
+the two kinds of features were different, it was no different from having only
+DBT data.
+
 
 ## Attribution:
 
