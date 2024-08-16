@@ -116,6 +116,8 @@ Cases with only biopsied masses:
 | experiment 7    |         1           |        30         |  0.4   |       0.6       |  0.5964   |
 | experiment 8    |         5           |        10         |  0.3   |       0.58      |  0.5877   |   
 
+Based on the above tuning performance criteria, the experiments with the best performance seem to be **experiment 1** and **experiment 4**.
+
 [Here](https://github.com/charbitz/diploma-thesis/tree/main/data/mlruns) you can find the tuning results of all the above experiments in cases with only biopsied masses. For each experiment you can find artifacts like training graphs, some metrics and training params and also the weights of the DenseYolo model that correspond to the best tuning.
 
 For example for experiment 1:
@@ -141,6 +143,10 @@ Cases with both biopsied and normal masses:
 | experiment 14   |         1           |        50         |  0.3   |       0.66      |  0.5789   |
 | experiment 15   |         1           |        30         |  0.4   |       0.7       |  0.5438   |
 | experiment 16   |         5           |        10         |  0.3   |       0.59      |  0.52     |   
+
+
+Based on the above tuning performance criteria, the experiments with the best performance seem to be **experiment 12**, **experiment 13** and **experiment 14**.
+
 
 ### Results of YOLOv5 network:
 
