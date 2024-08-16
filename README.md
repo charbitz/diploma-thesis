@@ -183,7 +183,6 @@ DBT data.
 :-------------------------:|:-------------------------:
 <img src="images/dbt_sample_no_pp.jpg" height="300" />   |  <img src="images/inbreast_sample_no_pp.jpg" height="300" />
  DBT image PP: | INBreast image PP: 
-:-------------------------:|:-------------------------:
 <img src="images/dbt_sample_pp.jpg" height="300" />   |  <img src="images/inbreast_sample_pp.jpg" height="300" />
 
 
