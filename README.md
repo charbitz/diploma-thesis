@@ -145,7 +145,7 @@ Cases with both biopsied and normal masses:
 | experiment 16   |         5           |        10         |  0.3   |       0.59      |  0.52     |   
 
 
-Based on the above tuning performance criteria, the experiments with the best performance seem to be **experiment 12**, **experiment 13** and **experiment 14**.
+Based on the above tuning performance criteria, the experiments with the best performance seem to be [**experiment 12**](https://github.com/charbitz/diploma-thesis/tree/main/data/mlruns/Exp_12), [**experiment 13**](https://github.com/charbitz/diploma-thesis/tree/main/data/mlruns/Exp_13) and [**experiment 14**](https://github.com/charbitz/diploma-thesis/tree/main/data/mlruns/Exp_14).
 
 
 ### Results of YOLOv5 network:
