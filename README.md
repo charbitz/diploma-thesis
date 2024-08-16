@@ -43,7 +43,7 @@ Data augmentations while training the YOLO model in DenseNet architecture:
 
 ### Apply a YOLOv5 network on DBT and INBreast data.
 
-The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). 
+The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). All the files from this repo that helped with the implemetation of this project can be found at [this repository](https://github.com/charbitz/dbt-on-yolov5)
 
 Apply preprocessing on both image databases in order to get better model performance:
 
