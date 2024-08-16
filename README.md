@@ -36,6 +36,11 @@ Data augmentations while training the YOLO model in DenseNet architecture:
 - random area cropping with a way that contains though the ground truth bounding box, final fixed image dimensions: (1056, 672)
 - random horrizontal flipping with a probability of 50%
 
+#### Tuning performance criteria:
+* True Positive Rate (Sensitivity) at 2 False Positives (at mean) per image (TPR2).
+* Performance of the model (TPR2) in test set should closely align with that in validation set.
+* As little flunctuations in TPR per epoch as possible.
+
 ### Apply a YOLOv5 network on DBT and INBreast data.
 
 The YOLOv5 network is implemented by [ultralytics](https://www.ultralytics.com/). The documentation of YOLOv5 and the under development code can be found [here](https://github.com/ultralytics/yolov5). 
@@ -54,6 +59,11 @@ Data augmentations while training the YOLOv5 model:
 - random horrizontal flipping with a probability of 50%
 - random vertical flipping with a probability of 50%
 
+#### Tuning performance criteria:
+* mAP (Mean Average Precision).
+* Performance of the model (mAP50-95) in test set should closely align with that in validation set.
+* mAP50-95: the average precision is calculated over multiple IoU thresholds, in steps of 0.05 (0.50, 0.55, 0.60, ..., 0.95).
+
 ### Apply transfer learning techniques on YOLOv5 model:
 
 Technique 1: 
@@ -61,6 +71,11 @@ Using all INBreast and part of DBT data on training set and then using the rest 
 
 Technique 2:
 Pretraining YOLOv5 on INBreast data and then use YOLOv5 with the best weights on DBT data.
+
+#### Tuning performance criteria:
+* mAP (Mean Average Precision).
+* Performance of the model (mAP50-95) in test set should closely align with that in validation set.
+* mAP50-95: the average precision is calculated over multiple IoU thresholds, in steps of 0.05 (0.50, 0.55, 0.60, ..., 0.95).
 
 ## File Description:
 
