@@ -180,12 +180,15 @@ the two kinds of features were different, it was no different from having only
 DBT data.
 
 <div align="center">
+
 | DBT image no PP: | INBreast image no PP: |
 |:-------------------------:|:-------------------------:|
 | <img src="images/dbt_sample_no_pp.jpg" height="200" /> | <img src="images/inbreast_sample_no_pp.jpg" height="200" /> |
 | DBT image PP: | INBreast image PP: |
 | <img src="images/dbt_sample_pp.jpg" height="200" /> | <img src="images/inbreast_sample_pp.jpg" height="200" /> |
+
 </div>
+
 
 
 ## Attribution:
