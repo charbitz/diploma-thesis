@@ -6,25 +6,25 @@ This is the code repository of my Diploma Thesis. The was not the original nor t
 
 * Digital Breast Tomosynthesis dataset published by Duke University, Durham, NC. You can find the dataset [here](https://www.cancerimagingarchive.net/collection/breast-cancer-screening-dbt/). This dataset consists of digital breast tomosynthesis images. Only 200 Biopsied case views and 234 Normal case views from this database were used. Biopsied cases have masses (benign or cancer) which were confirmed by radiologists by biopsy as dangerous. Normal cases have masses which do not correspond to dangerous findings, also confirmed by radiologists. The information was in the DICOM format so for the conversion of the images to the PNG format was implemented with the help of [this reposiroty](https://github.com/charbitz/dbt-data) 
 
-* The famous INBreast dataset which can be found [here](https://www.kaggle.com/datasets/ramanathansp20/inbreast-dataset). The INBreast database was used because of lack of DBT data. DBT data was difficult to find because it is a new medical imaging modality and so there were not so much data publicly available. This dataset consists of digital mammography images. Only 107 biopsied masses cases from this database were used. The groundtruth boxes were in Regions Of Interest information so the conversion to bounding boxes was implemented with the help of this [repository](https://github.com/charbitz/breast_mass_detection), which i forked and then commit changes for my implemetation. Also this repository was used for the conversion of the images from the DICOM format to PNG.
+* The famous INBreast dataset which can be found [here](https://www.kaggle.com/datasets/ramanathansp20/inbreast-dataset). The INBreast database was used because the size of DBT data was not enough. DBT data was difficult to find because it is a new medical imaging modality and so there were not so much data publicly available. This dataset consists of digital mammography images. Only 107 biopsied masses cases from this database were used. The groundtruth boxes were in Regions Of Interest information so the conversion to bounding boxes was implemented with the help of this [repository](https://github.com/charbitz/breast_mass_detection), which i forked and then commit changes for my implemetation. Also this repository was used for the conversion of the images from the DICOM format to PNG.
 
 ## Deep Learning Implementations:
 
 ### Apply a YOLO network in DenseNet architecture on DBT data.
 
-The architecture of this model of this implementation was created by [duke-dbt-detection](https://github.com/mateuszbuda/duke-dbt-detection) and it was used on a subset of the DBT data, with different tuning parameters and with different data augmentations.
+The architecture of this model of this implementation was created by [duke-dbt-detection](https://github.com/mateuszbuda/duke-dbt-detection) and at this project it was used on a subset of the DBT data, with different tuning parameters and with different data augmentations.
 
 Parameters of dataset splitting into subsets:
 - training: 50%, validation: 20%, test: 10%
-- splitting based on patients, in order not to have two different views of the same patient's mass in two different sets
+- splitting based on patients, in order not to have two different views of the same patient's mass in two different sets. The aim of this was to ensure that all subsets remained independent.
 
 Hyper-parameter tuning:
 - epochs
-- patience
+- patience : specifies how long in epochs the model should wait for an improvement in validation TPR2 metric, before ReduceLROnPlateau() function to be used.
 - initial learning rate
-- validation interval
-- schedule patience
-- factor of learning rate
+- validation interval : the frequency in epochs at which the model evaluates its performance on the validation dataset
+- schedule patience :  in ReduceLROnPlateau() function refers to the number of epochs with no improvement after which the learning rate will be reduced
+- factor of learning rate: in ReduceLROnPlateau() function determines by how much the learning rate will be reduced.
 
 Preprocessing in order to prepare the dataset:
 - image downscaling
