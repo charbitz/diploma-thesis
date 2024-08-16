@@ -180,13 +180,20 @@ the two kinds of features were different, it was no different from having only
 DBT data.
 
 <p align="center">
- DBT image no PP: | INBreast image no PP: 
-:-------------------------:|:-------------------------:
-<img src="images/dbt_sample_no_pp.jpg" height="300" />   |  <img src="images/inbreast_sample_no_pp.jpg" height="300" />
- DBT image PP: | INBreast image PP: 
-<img src="images/dbt_sample_pp.jpg" height="300" />   |  <img src="images/inbreast_sample_pp.jpg" height="300" />
+  DBT image no PP: | INBreast image no PP:
 </p>
 
+<p align="center">
+  <img src="images/dbt_sample_no_pp.jpg" height="300" /> | <img src="images/inbreast_sample_no_pp.jpg" height="300" />
+</p>
+
+<p align="center">
+  DBT image PP: | INBreast image PP:
+</p>
+
+<p align="center">
+  <img src="images/dbt_sample_pp.jpg" height="300" /> | <img src="images/inbreast_sample_pp.jpg" height="300" />
+</p>
 ## Attribution:
 
 So finally this project includes code from the following repositories:
